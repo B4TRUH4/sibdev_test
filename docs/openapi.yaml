@@ -1,0 +1,78 @@
+openapi: 3.0.3
+info:
+  title: Deals API
+  description: API для анализа типовых сделок по покупкам камней
+  contact:
+    email: matveybond2002@gmail.com
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000/api/
+tags:
+  - name: deals
+    description: Сделки
+paths:
+  /deals:
+
+    post:
+      tags:
+        - deals
+      summary: Загрузка файла для анализа
+      description: Загружает содержимое файла в базу данных
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: "Success"
+        '400':
+          description: "Bad request"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  desc:
+                    type: string
+                    example: "Файл не задан"
+
+    get:
+
+      summary: Получение рузультатов анализа
+      description: Возвращает 5 покупателей, потративших максимальное количество денег
+      responses:
+        '200':
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Customer'
+
+components:
+  schemas:
+    Customer:
+      type: object
+      properties:
+        username:
+          type: string
+        spent_money:
+          $ref: '#/components/schemas/Decimal'
+        gems:
+          type: array
+          items:
+            type: string
+
+    Decimal:
+      type: string
+      example: "1234.56"

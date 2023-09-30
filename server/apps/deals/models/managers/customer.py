@@ -6,14 +6,17 @@ from ..querysets import CustomerQuerySet
 
 
 class CustomerManager(Manager):
+    """
+    Класс-Менеджер для Покупателя
+    """
     def get_queryset(self, **kwargs) -> CustomerQuerySet:
         return CustomerQuerySet(self.model, using=self._db)
 
     def annotate_with_spent_money(self) -> QuerySet:
         return self.get_queryset().annotate_with_spent_money()
 
-    def get_top_customers(self):
+    def get_top_customers(self) -> QuerySet:
         return self.get_queryset().get_top_customers()
 
-    def annotate_with_top_gems(self):
+    def annotate_with_top_gems(self) -> list:
         return self.get_queryset().annotate_with_top_gems()

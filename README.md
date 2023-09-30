@@ -21,9 +21,13 @@
 1. Клонируйте репозиторий на вашу локальную машину;
 2. Перейдите в корневую директорию проекта;
 3. Для запуска **DEV**-версии выполнить  
-`docker compose up`;
+```commandline
+docker compose up
+```
 4. Для запуска **PROD**-версии (на gunicorn-сервере + nginx) выполнить  
-`docker compose -f docker-compose.prod.yml up`.
+```commandline
+docker compose -f docker-compose.prod.yml up
+```
 
 ## API Документация
 

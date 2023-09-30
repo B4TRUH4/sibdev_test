@@ -21,7 +21,8 @@ class CustomerQuerySet(QuerySet):
             ),
         )
 
-    def get_top_customers(self, amount=CustomerConstants.TOP_CUSTOMERS_AMOUNT):
+    def get_top_customers(
+            self, amount=CustomerConstants.TOP_CUSTOMERS_AMOUNT) -> QuerySet:
         """
         Возвращает указанное количество покупателей
         с наибольшими затратами за весь период
